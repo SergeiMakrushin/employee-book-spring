@@ -49,5 +49,5 @@ public class EmployeeController {
     public int getSalaryMax() {
         return this.employeeService.getSalaryMax();
     }
-/////////////////
+
 }

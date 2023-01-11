@@ -51,4 +51,3 @@ GET  http://localhost:8080/employees/salary/min
 
 ### Получить всех сотрудников с зарплатой выше средней
 GET http://localhost:8080/employee/high-salary
-///////////////////

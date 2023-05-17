@@ -9,12 +9,14 @@ public class Employee {
     private final int departament;
     private final int salary;
 
+
+
     public Employee(String firstName, String lastName, int departament, int salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.departament = departament;
         this.salary = salary;
-        this.id=couter++;
+        this.id=++couter;
     }
 
     public int getId() {

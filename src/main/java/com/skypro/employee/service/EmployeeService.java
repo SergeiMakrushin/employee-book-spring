@@ -5,6 +5,7 @@ import com.skypro.employee.record.EmployeeRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -14,7 +15,6 @@ public class EmployeeService {
     public Collection<Employee> getAllEmployees() {
         return this.employees.values();
     }
-
 
     public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
@@ -30,14 +30,44 @@ public class EmployeeService {
         return employee;
     }
 
+    public Collection<Employee> getAllEmployeesSorted() {
+        final List<Employee> employee = employees.values().stream()
+                .sorted(Comparator.comparing(Employee::getDepartament))
+                .toList();
+        return employee;
+    }
+
+
+    public Collection<Employee> getDepartmentEmployees(int departmentId) {
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .toList();
+    }
+
+    public Optional<Employee> getSalaryMinDepartment(int departmentId) {
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .min(Comparator.comparing(Employee::getSalary));
+
+    }
+
+    public Optional<Employee> getSalaryMaxDepartment(int departmentId) {
+
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .max(Comparator.comparing(Employee::getSalary));
+
+    }
+
     public int getSalarySum() {
         return employees.values().stream()
                 .mapToInt(Employee::getSalary)
                 .sum();
     }
 
+
     public int getSalaryMin() {
-        Integer min = 10000000;
+        int min = 10000000;
         for (Employee value : employees.values()) {
             if (value.getSalary() < min) {
                 min = value.getSalary();
@@ -58,8 +88,8 @@ public class EmployeeService {
 
     public Collection<Employee> getHigherMediumSalary() {
 
-        Integer sum = 0;
-        Integer medium;
+        int sum = 0;
+        int medium;
         for (Employee value : employees.values()) {
             sum += value.getSalary();
         }

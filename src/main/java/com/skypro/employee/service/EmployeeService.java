@@ -29,28 +29,27 @@ public class EmployeeService {
         this.employees.put(employee.getId(), employee);
         return employee;
     }
-
+//Возвращать всех сотрудников с разделением по отделам.
     public Collection<Employee> getAllEmployeesSorted() {
-        final List<Employee> employee = employees.values().stream()
+        return employees.values().stream()
                 .sorted(Comparator.comparing(Employee::getDepartament))
                 .toList();
-        return employee;
     }
 
-
+//Возвращать всех сотрудников по отделу.
     public Collection<Employee> getDepartmentEmployees(int departmentId) {
         return employees.values().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .toList();
     }
-
+// Возвращать сотрудника с минимальной зарплатой на основе номера отдела.
     public Optional<Employee> getSalaryMinDepartment(int departmentId) {
         return employees.values().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .min(Comparator.comparing(Employee::getSalary));
 
     }
-
+    //Возвращать сотрудника с максимальной зарплатой на основе номера отдела
     public Optional<Employee> getSalaryMaxDepartment(int departmentId) {
 
         return employees.values().stream()

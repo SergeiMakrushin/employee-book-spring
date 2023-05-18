@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final Map<Integer, Employee> employees = new HashMap<>();
     private final Map<Integer, Employee> employees1 = new HashMap<>();
-
+// Вернуть всех сотрудников
     public Collection<Employee> getAllEmployees() {
         return this.employees.values();
     }
-
+// Создать сотрудника
     public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
             throw new IllegalArgumentException("Employee name should be set");

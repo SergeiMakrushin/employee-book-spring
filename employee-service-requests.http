@@ -5,39 +5,100 @@ GET http://localhost:8080/employees
 POST http://localhost:8080/employees
 Content-Type: application/json
 
-{"firstName":   "Test",
+{
+  "firstName": "Test",
   "lastName": "Test",
   "departament": 1,
   "salary": 1000
 }
+
 ### Создать сотрудника 2
 POST http://localhost:8080/employees
 Content-Type: application/json
 
-{"firstName":   "Test2",
+{
+  "firstName": "Test2",
   "lastName": "Test2",
-  "departament": 2,
-  "salary": 3000
-  }
+  "departament": 1,
+  "salary": 2300
+}
 
-### ### Создать сотрудника 3
+### Создать сотрудника 3
 POST http://localhost:8080/employees
 Content-Type: application/json
 
-{"firstName":   "Test3",
+{
+  "firstName": "Test3",
   "lastName": "Test3",
-  "departament": 3,
-  "salary": 2500
-  }
+  "departament": 2,
+  "salary": 3000
+}
 
 ### Создать сотрудника 4
 POST http://localhost:8080/employees
 Content-Type: application/json
 
-{"firstName":   "Test4",
+{
+  "firstName": "Test4",
   "lastName": "Test4",
+  "departament": 2,
+  "salary": 7000
+}
+
+### ### Создать сотрудника 5
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test5",
+  "lastName": "Test5",
+  "departament": 3,
+  "salary": 2500
+}
+
+### ### Создать сотрудника 6
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test6",
+  "lastName": "Test6",
+  "departament": 3,
+  "salary": 5500
+}
+
+
+### Создать сотрудника 7
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test7",
+  "lastName": "Test7",
   "departament": 4,
   "salary": 3700
+}
+
+### Создать сотрудника 8
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test8",
+  "lastName": "Test8",
+  "departament": 4,
+  "salary": 3950
+}
+
+### Создать сотрудника 9
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Test9",
+  "lastName": "Test9",
+  "departament": 4,
+  "salary": 4350
 }
 
 ### Получить сумму всех затрат  по сотрудникам
@@ -50,5 +111,16 @@ GET http://localhost:8080/employees/salary/max
 GET  http://localhost:8080/employees/salary/min
 
 ### Получить всех сотрудников с зарплатой выше средней
-GET http://localhost:8080/employee/high-salary
-///////////////////
+GET http://localhost:8080/employees/high-salary
+
+### Получить сотрудника с максимальной зарплатой в отделе
+GET  http://localhost:8080/employees/salary/max_department?departmentId=4
+
+### Получить сотрудника с минимальной зарплатой в отделе
+GET  http://localhost:8080/employees/salary/min_department?departmentId=4
+
+### Получить всех сотрудников отдела
+GET  http://localhost:8080/employees_department?departmentId=3
+
+### Получить всех сотрудников по отделам
+GET http://localhost:8080/employees_sorted_department

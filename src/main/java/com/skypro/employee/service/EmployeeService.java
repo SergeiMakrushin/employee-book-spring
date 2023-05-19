@@ -5,17 +5,17 @@ import com.skypro.employee.record.EmployeeRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
     private final Map<Integer, Employee> employees = new HashMap<>();
     private final Map<Integer, Employee> employees1 = new HashMap<>();
-
+// Вернуть всех сотрудников
     public Collection<Employee> getAllEmployees() {
         return this.employees.values();
     }
-
-
+// Создать сотрудника
     public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
             throw new IllegalArgumentException("Employee name should be set");
@@ -29,6 +29,34 @@ public class EmployeeService {
         this.employees.put(employee.getId(), employee);
         return employee;
     }
+//Возвращать всех сотрудников с разделением по отделам.
+    public Collection<Employee> getAllEmployeesSorted() {
+        return employees.values().stream()
+                .sorted(Comparator.comparing(Employee::getDepartament))
+                .toList();
+    }
+
+//Возвращать всех сотрудников по отделу.
+    public Collection<Employee> getDepartmentEmployees(int departmentId) {
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .toList();
+    }
+// Возвращать сотрудника с минимальной зарплатой на основе номера отдела.
+    public Optional<Employee> getSalaryMinDepartment(int departmentId) {
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .min(Comparator.comparing(Employee::getSalary));
+
+    }
+    //Возвращать сотрудника с максимальной зарплатой на основе номера отдела
+    public Optional<Employee> getSalaryMaxDepartment(int departmentId) {
+
+        return employees.values().stream()
+                .filter(e -> e.getDepartament() == departmentId)
+                .max(Comparator.comparing(Employee::getSalary));
+
+    }
 
     public int getSalarySum() {
         return employees.values().stream()
@@ -36,8 +64,9 @@ public class EmployeeService {
                 .sum();
     }
 
+
     public int getSalaryMin() {
-        Integer min = 10000000;
+        int min = 10000000;
         for (Employee value : employees.values()) {
             if (value.getSalary() < min) {
                 min = value.getSalary();
@@ -58,8 +87,8 @@ public class EmployeeService {
 
     public Collection<Employee> getHigherMediumSalary() {
 
-        Integer sum = 0;
-        Integer medium;
+        int sum = 0;
+        int medium;
         for (Employee value : employees.values()) {
             sum += value.getSalary();
         }
@@ -78,5 +107,5 @@ public class EmployeeService {
 
     }
 
-////////////////////
+
 }

@@ -6,6 +6,8 @@ import com.skypro.employee.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -26,9 +28,9 @@ public class EmployeeController {
         return this.employeeService.getDepartmentEmployees(departmentId);
     }
 
-    @GetMapping ("/employees_sorted_department")
-    public Collection <Employee> getAllEmployeesSorted() {
-        return this.employeeService.getAllEmployeesSorted();
+    @GetMapping ("/employees_grouping_department")
+    public Map<Integer, List<Employee>> getAllEmployeesGroupingDepartment() {
+        return this.employeeService.getAllEmployeesGroupingDepartment();
     }
 
     @GetMapping("/employees/high-salary")

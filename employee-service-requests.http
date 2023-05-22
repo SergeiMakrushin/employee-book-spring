@@ -104,7 +104,7 @@ Content-Type: application/json
 ### Получить сумму всех затрат  по сотрудникам
 GET http://localhost:8080/employees/salary/sum
 
-### Получитm максимальную зарплату
+### Получить максимальную зарплату
 GET http://localhost:8080/employees/salary/max
 
 ### Получить минимальную зарплату
@@ -123,4 +123,4 @@ GET  http://localhost:8080/employees/salary/min_department?departmentId=4
 GET  http://localhost:8080/employees_department?departmentId=3
 
 ### Получить всех сотрудников по отделам
-GET http://localhost:8080/employees_sorted_department
+GET http://localhost:8080/employees_grouping_department

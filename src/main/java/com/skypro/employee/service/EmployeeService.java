@@ -30,10 +30,10 @@ public class EmployeeService {
         return employee;
     }
 //Возвращать всех сотрудников с разделением по отделам.
-    public Collection<Employee> getAllEmployeesSorted() {
+    public Map<Integer,List<Employee>> getAllEmployeesGroupingDepartment() {
         return employees.values().stream()
-                .sorted(Comparator.comparing(Employee::getDepartament))
-                .toList();
+               .collect(Collectors.groupingBy(Employee::getDepartament));
+
     }
 
 //Возвращать всех сотрудников по отделу.

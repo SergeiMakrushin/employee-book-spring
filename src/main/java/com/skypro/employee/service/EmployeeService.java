@@ -11,6 +11,16 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final Map<Integer, Employee> employees = new HashMap<>();
     private final Map<Integer, Employee> employees1 = new HashMap<>();
+
+//    public EmployeeService() {
+//        addEmployee(new EmployeeRequest("Nikolay","Ivanov",1,2000));
+//        addEmployee(new EmployeeRequest("Nikolay","Ivanov",1,2000));
+//        addEmployee(new EmployeeRequest("Nikolay","Ivanov",1,2000));
+//        addEmployee(new EmployeeRequest("Nikolay","Ivanov",1,2000));
+//
+//    }
+
+
 // Вернуть всех сотрудников
     public Collection<Employee> getAllEmployees() {
         return this.employees.values();
@@ -29,6 +39,8 @@ public class EmployeeService {
         this.employees.put(employee.getId(), employee);
         return employee;
     }
+
+
 //Возвращать всех сотрудников с разделением по отделам.
     public Map<Integer,List<Employee>> getAllEmployeesGroupingDepartment() {
         return employees.values().stream()

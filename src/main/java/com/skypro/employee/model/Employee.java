@@ -1,5 +1,7 @@
 package com.skypro.employee.model;
 
+import com.skypro.employee.record.EmployeeRequest;
+
 public class Employee {
 
     private static int couter;
@@ -12,6 +14,7 @@ public class Employee {
 
 
     public Employee(String firstName, String lastName, int departament, int salary) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.departament = departament;

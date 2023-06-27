@@ -5,6 +5,7 @@ import com.skypro.employee.record.EmployeeRequest;
 import com.skypro.employee.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -68,5 +69,11 @@ public class EmployeeController {
     public Optional<Employee> getSalaryMinDepartment(@RequestParam("departmentId") int departmentId) {
         return this.employeeService.getSalaryMinDepartment(departmentId);
     }
+
+
+//    @GetMapping("/department/{id}/employees")
+//    public Collection<Employee> getListEmployeeTheDepartment(@PathParam(value = "id")int id) {
+//        return employeeService.getListEmployeeTheDepartment(id);
+//    }
 }
 //

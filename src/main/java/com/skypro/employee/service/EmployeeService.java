@@ -10,39 +10,36 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
-    EmployeeRepository employeeRepository;
-    EmployeeService (EmployeeRepository employeeRepository) {
-        this.employeeRepository=employeeRepository;
-    }
+
+
     private final Map<Integer, Employee> employees = new HashMap<>();
     private final Map<Integer, Employee> employees1 = new HashMap<>();
 
 
     // Вернуть всех сотрудников
     public Collection<Employee> getAllEmployees() {
-//        return this.employees.values();
-        HashMap<Integer,Employee> emp1=new HashMap<>(employeeRepository.getAllEmployees());
-        return emp1.values();
+
+        return this.employees.values();
     }
 
     // Создать сотрудника
 
     public Employee addEmployee(EmployeeRequest employeeRequest) {
-        return employeeRepository.addEmployee(employeeRequest);
-    }
-//    public Employee addEmployee(EmployeeRequest employeeRequest) {
-//        if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
-//            throw new IllegalArgumentException("Employee name should be set");
-//        }
-//        Employee employee = new Employee(
-//                employeeRequest.getFirstName(),
-//                employeeRequest.getLastName(),
-//                employeeRequest.getDepartament(),
-//                employeeRequest.getSalary());
-//
-//        this.employees.put(employee.getId(), employee);
-//        return employee;
 
+        if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
+            throw new IllegalArgumentException("Employee name should be set");
+        }
+        Employee employee = new Employee(
+                employeeRequest.getFirstName(),
+                employeeRequest.getLastName(),
+                employeeRequest.getDepartament(),
+                employeeRequest.getSalary()
+
+        );
+
+        this.employees.put(employee.getId(), employee);
+        return employee;
+    }
 
 
     //Возвращать всех сотрудников с разделением по отделам.
@@ -52,11 +49,9 @@ public class EmployeeService {
 
     }
 
-    //Возвращать всех сотрудников по отделу.
+    //Возвращать всех сотрудников по номеру отдела.
     public Collection<Employee> getDepartmentEmployees(int departmentId) {
-        HashMap<Integer,Employee>emp1=new HashMap<>(employeeRepository.getAllEmployees());
-        return emp1.values().stream()
-//        return employees.values().stream()
+        return employees.values().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .toList();
     }
@@ -85,24 +80,19 @@ public class EmployeeService {
     }
 
 
-    public int getSalaryMin() {
-        int min = 10000000;
-        for (Employee value : employees.values()) {
-            if (value.getSalary() < min) {
-                min = value.getSalary();
-            }
-        }
-        return min;
+    public OptionalInt getSalaryMin() {
+        return employees.values().stream()
+                .mapToInt(Employee::getSalary)
+                .min();
+
+
     }
 
-    public int getSalaryMax() {
-        Integer max = -1;
-        for (Employee value : employees.values()) {
-            if (value.getSalary() > max) {
-                max = value.getSalary();
-            }
-        }
-        return max;
+    public OptionalInt getSalaryMax() {
+        return employees.values().stream()
+                .mapToInt(Employee::getSalary)
+                .max();
+
     }
 
     public Collection<Employee> getHigherMediumSalary() {
@@ -126,13 +116,6 @@ public class EmployeeService {
         return this.employees1.values();
 
     }
-
-//    public Collection<Employee> getListEmployeeTheDepartment(int departmentId) {
-//        HashMap<Integer,Employee>emp1=new HashMap<>(employeeRepository.getAllEmployees());
-//        return emp1.values().stream()
-//                .filter(e -> e.getDepartament() == departmentId)
-//                .toList();
-//    }
 
 
 }

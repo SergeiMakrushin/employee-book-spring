@@ -5,45 +5,34 @@ import com.skypro.employee.repozitory.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
 
-    EmployeeRepository employeeRepository;
+   private final EmployeeService employeeService;
 
-    DepartmentService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    DepartmentService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
-//    public Collection<Employee> getAllEmployees() {
-//
-//        return employeeRepository.getAllEmployees();
-//    }
-
-    // Создать сотрудника
-
-    //    public Employee addEmployee(EmployeeRequest employeeRequest) {
-//        return employeeRepository.addEmployee(employeeRequest);
-//    }
-////DepartmentService()
-    //            — возвращает список сотрудников по департаменту.
-    public Collection<Employee> getListEmployeeTheDepartment(int departmentId) {
-        HashMap<Integer, Employee> emp1 = new HashMap<>(employeeRepository.getAllEmployees());
-        return emp1.values().stream()
-                .filter(e -> e.getDepartament() == departmentId)
+    //    возвращает список сотрудников по департаменту.
+    public Collection<Employee> getListEmployeeTheDepartment(int id) {
+        return employeeService.getAllEmployees().stream()
+                .filter(e -> e.getDepartament() == id)
                 .toList();
     }
-    //            — возвращает сумму зарплат по департаменту.
-    public int getSumSularyTheDepartment(int departmentId) {
-        return employeeRepository.getAllEmployees().values().stream()
+    //  возвращает сумму зарплат по департаменту.
+    public int getSumSalaryTheDepartment(int departmentId) {
+        return employeeService.getAllEmployees().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .mapToInt(Employee::getSalary)
                 .sum();
 
     }
-    //            — возвращает максимальную зарплату по департаменту.
+    //   возвращает максимальную зарплату по департаменту.
     public OptionalInt getSalaryMaxTheDepartment(int departmentId) {
-        return employeeRepository.getAllEmployees().values().stream()
+        return employeeService.getAllEmployees().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .mapToInt(Employee::getSalary)
                 .max();
@@ -51,10 +40,17 @@ public class DepartmentService {
 
 //    возвращает минимальную зарплату по департаменту
     public OptionalInt getSalaryMinTheDepartment(int departmentId) {
-        return employeeRepository.getAllEmployees().values().stream()
+        return employeeService.getAllEmployees().stream()
                 .filter(e -> e.getDepartament() == departmentId)
                 .mapToInt(Employee::getSalary)
                 .min();
+    }
+
+//    возвращает сотрудников, сгруппированых по отделам
+    public Map<Integer, List<Employee>> getAllEmployeesGroupingDepartment() {
+        return employeeService.getAllEmployees().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartament));
+
     }
 
 }

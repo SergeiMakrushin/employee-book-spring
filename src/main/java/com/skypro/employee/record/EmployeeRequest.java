@@ -2,12 +2,22 @@ package com.skypro.employee.record;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 public class EmployeeRequest {
+
+
     private String firstName;
     private String lastName;
     private int departament;
     private int salary;
 
+    public EmployeeRequest(String firstName, String lastName, int departament, int salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.departament = departament;
+        this.salary = salary;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -23,6 +33,7 @@ public class EmployeeRequest {
         }
 
     }
+
 
     public String getLastName() {
         return lastName;
@@ -54,5 +65,19 @@ public class EmployeeRequest {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeRequest that = (EmployeeRequest) o;
+        return departament == that.departament && salary == that.salary && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, departament, salary);
     }
 }

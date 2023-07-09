@@ -117,10 +117,25 @@ GET http://localhost:8080/employees/high-salary
 GET  http://localhost:8080/employees/salary/max_department?departmentId=4
 
 ### Получить сотрудника с минимальной зарплатой в отделе
-GET  http://localhost:8080/employees/salary/min_department?departmentId=4
+GET  http://localhost:8080/employees/salary/min_department?departmentId=1
 
 ### Получить всех сотрудников отдела
-GET  http://localhost:8080/employees_department?departmentId=3
+GET  http://localhost:8080/employees_department?departmentId=1
 
 ### Получить всех сотрудников по отделам
 GET http://localhost:8080/employees_grouping_department
+
+### возвращает список сотрудников по департаменту
+GET http://localhost:8080/department/4/employees/
+
+### возвращает сумму зарплат по департаменту
+GET http://localhost:8080/department/4/salary/sum/
+
+### возвращает максимальную зарплату по департаменту
+GET http://localhost:8080/department/4/salary/max/
+
+### возвращает минимальную зарплату по департаменту
+GET http://localhost:8080/department/4/salary/min/
+
+### возвращает сотрудников, сгруппированых по отделам
+GET http://localhost:8080/department/employees

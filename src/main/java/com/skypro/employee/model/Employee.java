@@ -2,15 +2,17 @@ package com.skypro.employee.model;
 
 import com.skypro.employee.record.EmployeeRequest;
 
+import java.util.Objects;
+
 public class Employee {
 
     private static int couter;
+
     private final int id;
     private final String firstName;
     private final String lastName;
     private final int departament;
     private final int salary;
-
 
 
     public Employee(String firstName, String lastName, int departament, int salary) {
@@ -19,7 +21,7 @@ public class Employee {
         this.lastName = lastName;
         this.departament = departament;
         this.salary = salary;
-        this.id=++couter;
+        this.id = ++couter;
     }
 
     public int getId() {
@@ -51,5 +53,18 @@ public class Employee {
                 ", departament=" + departament +
                 ", salary=" + salary +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return departament == employee.departament && salary == employee.salary;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(departament, salary);
     }
 }

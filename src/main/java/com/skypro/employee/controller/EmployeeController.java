@@ -5,10 +5,7 @@ import com.skypro.employee.record.EmployeeRequest;
 import com.skypro.employee.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class EmployeeController {
@@ -24,11 +21,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees_department")
-    public Collection<Employee>getDepartmentEmployees(@RequestParam("departmentId") int departmentId) {
+    public Collection<Employee> getDepartmentEmployees(@RequestParam("departmentId") int departmentId) {
         return this.employeeService.getDepartmentEmployees(departmentId);
     }
 
-    @GetMapping ("/employees_grouping_department")
+    @GetMapping("/employees_grouping_department")
     public Map<Integer, List<Employee>> getAllEmployeesGroupingDepartment() {
         return this.employeeService.getAllEmployeesGroupingDepartment();
     }
@@ -51,12 +48,12 @@ public class EmployeeController {
 
     @GetMapping("/employees/salary/min")
 
-    public int getSalaryMin() {
+    public OptionalInt getSalaryMin() {
         return this.employeeService.getSalaryMin();
     }
 
     @GetMapping("/employees/salary/max")
-    public int getSalaryMax() {
+    public OptionalInt getSalaryMax() {
         return this.employeeService.getSalaryMax();
     }
 
@@ -64,9 +61,11 @@ public class EmployeeController {
     public Optional<Employee> getSalaryMaxDepartment(@RequestParam("departmentId") int departmentId) {
         return this.employeeService.getSalaryMaxDepartment(departmentId);
     }
+
     @GetMapping("/employees/salary/min_department")
     public Optional<Employee> getSalaryMinDepartment(@RequestParam("departmentId") int departmentId) {
         return this.employeeService.getSalaryMinDepartment(departmentId);
     }
+
+
 }
-//

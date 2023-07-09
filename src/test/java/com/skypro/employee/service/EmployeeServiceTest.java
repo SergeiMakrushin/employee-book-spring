@@ -15,59 +15,52 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeServiceTest {
     private EmployeeService employeeService;
 
-    private Employee employee;
     private EmployeeRequest employee1;
     private EmployeeRequest employee2;
     private EmployeeRequest employee3;
     private EmployeeRequest employee4;
 
+
     @BeforeEach
     public void setUp() {
 
-        employeeService = new EmployeeService();
-        employee1 = new EmployeeRequest("Антон", "Иванов", 1, 100);
-        employee2 = new EmployeeRequest("Иван", "Петров", 1, 200);
-        employee3 = new EmployeeRequest("Ольга", "Ларионова", 2, 120);
-        employee4 = new EmployeeRequest("Надежда", "Ильина", 2, 200);
+        employee1 = new EmployeeRequest();
+        employee1.setFirstName("Антон");
+        employee1.setLastName("Иванов");
+        employee1.setDepartament(1);
+        employee1.setSalary(100);
 
+        employee2 = new EmployeeRequest();
+        employee2.setFirstName("Иван");
+        employee2.setLastName("Петров");
+        employee2.setDepartament(1);
+        employee2.setSalary(200);
+
+        employee3 = new EmployeeRequest();
+        employee3.setFirstName("Ольга");
+        employee3.setLastName("Ларионова");
+        employee3.setDepartament(2);
+        employee3.setSalary(120);
+
+        employee4 = new EmployeeRequest();
+        employee4.setFirstName("Надежда");
+        employee4.setLastName("Ильина");
+        employee4.setDepartament(2);
+        employee4.setSalary(200);
+
+        employeeService = new EmployeeService();
         employeeService.addEmployee(employee1);
         employeeService.addEmployee(employee2);
         employeeService.addEmployee(employee3);
         employeeService.addEmployee(employee4);
+
+
+
     }
-//        employee1 = new EmployeeRequest();
-//        employeeRequest.setFirstName("Антон");
-//        employeeRequest.setLastName("Иванов");
-//        employeeRequest.setDepartament(1);
-//        employeeRequest.setSalary(100);
-//
-//        employee2 = new EmployeeRequest();
-//        employeeRequest.setFirstName("Иван");
-//        employeeRequest.setLastName("Петров");
-//        employeeRequest.setDepartament(1);
-//        employeeRequest.setSalary(200);
-//
-//        employee3 = new EmployeeRequest();
-//        employeeRequest.setFirstName("Ольга");
-//        employeeRequest.setLastName("Ларионова");
-//        employeeRequest.setDepartament(2);
-//        employeeRequest.setSalary(120);
-//
-//        employee4 = new EmployeeRequest();
-//        employeeRequest.setFirstName("Надежда");
-//        employeeRequest.setLastName("Ильина");
-//        employeeRequest.setDepartament(2);
-//        employeeRequest.setSalary(200);
-//
-//        employeeService = new EmployeeService();
-//        employeeService.addEmployee(employee1);
-//        employeeService.addEmployee(employee2);
-//        employeeService.addEmployee(employee3);
-//        employeeService.addEmployee(employee4);
-//    }
 
     @Test
     void getAllEmployees() {
+
         int expected = employeeService.getAllEmployees().size();
         int actual = 4;
         assertEquals(expected, actual);

@@ -12,18 +12,14 @@ public class EmployeeRequest {
     private int departament;
     private int salary;
 
-    public EmployeeRequest(String firstName, String lastName, int departament, int salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.departament = departament;
-        this.salary = salary;
-    }
 
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
+        this.firstName = firstName;
+
         if (firstName != null || StringUtils.isNotEmpty(firstName) ||
                 StringUtils.isNotBlank(firstName) ||
                 StringUtils.isAlphaSpace(firstName)) {
@@ -40,6 +36,7 @@ public class EmployeeRequest {
     }
 
     public void setLastName(String lastName) {
+        this.lastName = lastName;
         if (lastName != null || StringUtils.isNotEmpty(lastName) ||
                 StringUtils.isNotBlank(lastName) ||
                 StringUtils.isAlphaSpace(lastName)) {
